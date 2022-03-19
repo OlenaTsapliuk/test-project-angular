@@ -1,0 +1,39 @@
+<div *ngIf="formTemp" class="list-wrapper">
+  <h2>Список категорий</h2>
+  <form [formGroup]="formTemp">
+    <div formArrayName="categoryArray">
+      <div *ngFor="let category of categoryArray.controls; index as i">
+        <div [formGroupName]="i" class="categoryList">
+          <input #id formControlName="id" placeholder="categoryArray" />
+          <input #name formControlName="name" placeholder="categoryArray" />
+
+          <button (click)="editCategory(name)">Edit</button>
+          <button (click)="saveCategory(name.value, id.value)">Save</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="form-wrapper">
+  <h2>Добавить категорию</h2>
+  <form [formGroup]="addCategory" class="form">
+    <div class="category-box">
+      <div class="input-wrapper">
+        <label for="name" class="label">Название категории</label>
+        <input type="text" id="name" formControlName="name" />
+      </div>
+    </div>
+
+    <br />
+    <div class="case-button">
+      <button
+        type="submit"
+        (click)="addNewCategory()"
+        class="button-category"
+        [disabled]="!addCategory.valid"
+      >
+        Добавить
+      </button>
+    </div>
+  </form>
+</div>

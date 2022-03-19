@@ -1,0 +1,110 @@
+.basket-icon {
+  padding-top: 10px;
+  margin-left: 100px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+.image {
+  width: 100px;
+  height: 100px;
+}
+.basket-container {
+  display: flex;
+}
+.title {
+  text-align: center;
+  margin-top: 20px;
+}
+.notification {
+  margin-top: 100px;
+  text-align: center;
+}
+.totalPrice {
+  text-align: right;
+  font-size: 24px;
+  font-weight: 500;
+}
+.wrapper {
+  width: 200px;
+  height: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(11, 75, 38);
+}
+.content {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+}
+.addToBuy {
+  width: auto;
+  height: 45px;
+  margin-top: 15px;
+  background-color: rgba(17, 136, 52, 0.533);
+  padding: 10px;
+  border-radius: 4px;
+}
+
+input.ng-touched.ng-invalid {
+  border-color: red;
+}
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.form {
+  display: flex;
+  position: relative;
+  justify-content: left;
+  margin-top: 30px;
+  width: 1000px;
+  height: 150px;
+  border: 1px solid #000;
+  padding: 15px;
+  border-radius: 3px;
+  background-color: rgb(222, 218, 224);
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+}
+input {
+  color: #03032e;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #bdbdbd;
+  width: 150px;
+  height: 12px;
+  outline: 0;
+  margin-bottom: 10px;
+}
+button {
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background-color: #044739;
+  padding: 8px 20px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.label {
+  display: inline-block;
+  font-size: 18px;
+  color: #03032e;
+  margin-bottom: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.input-wrapper {
+  // margin-right: 10px;
+}
+.button-ok {
+  width: 80px;
+  height: 35px;
+}

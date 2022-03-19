@@ -1,0 +1,12 @@
+<div class="menu">
+  <ul class="card-set">
+    <li *ngFor="let dish of dishes" class="item">
+      <app-single-dish
+        [dish]="dish"
+        (click)="selectDish(dish)"
+      ></app-single-dish>
+    </li>
+  </ul>
+</div>
+
+<app-modal #modal [dish]="selectedDish"></app-modal>

@@ -1,0 +1,59 @@
+<div *ngIf="formDish" class="list-wrapper">
+  <h2>Список блюд</h2>
+  <form [formGroup]="formDish">
+    <div formArrayName="dishesList">
+      <div *ngFor="let dishes of dishesList.controls; index as i" class="form">
+        <div [formGroupName]="i" class="dishesList">
+          <div class="box">
+            <label for="id">Id </label>
+            <input #id formControlName="id" placeholder="id" />
+          </div>
+          <div class="box">
+            <label for="name">Name </label>
+            <input #name formControlName="name" placeholder="name" />
+          </div>
+          <div class="box">
+            <label for="description">Description </label>
+            <textarea
+              #description
+              formControlName="description"
+              placeholder="description"
+            ></textarea>
+          </div>
+          <div class="box">
+            <label for="price">Price </label>
+            <input #price formControlName="price" placeholder="price" />
+          </div>
+          <div class="box">
+            <label for="imageURL">ImageURL </label>
+            <input
+              #imageURL
+              formControlName="imageURL"
+              placeholder="imageURL"
+            />
+          </div>
+          <div class="box">
+            <label for="Ingredients">Ingredients </label>
+            <input
+              #ingredients
+              formControlName="ingredients"
+              placeholder="ingredients"
+            />
+          </div>
+          <div class="box">
+            <label for="Category">Category </label>
+            <input
+              #category
+              formControlName="category"
+              placeholder="category"
+            />
+          </div>
+          <div class="button-list">
+            <button (click)="editDish(dishes)">Edit</button>
+            <button (click)="saveDish(dishes)">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

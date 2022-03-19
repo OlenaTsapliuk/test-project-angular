@@ -1,0 +1,22 @@
+.list-orders {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.form-wrapper {
+  margin-top: 120px;
+  border: 1px solid rgb(1, 54, 15);
+  margin-bottom: 120px;
+}
+.position {
+  display: flex;
+}
+h2 {
+  text-align: center;
+}
+.name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(4, 139, 94);
+}

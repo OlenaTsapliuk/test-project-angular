@@ -1,0 +1,24 @@
+<div class="form-wrapper">
+  <h2>Заказы</h2>
+  <div class="list-orders" *ngFor="let order of orderList2$ | async">
+    <div class="name">
+      <p>Имя покупателя: {{ order.userEmail }}</p>
+    </div>
+    <div class="position" *ngFor="let position of order.positions">
+      <div class="">
+        <div class="">{{ position.name }}</div>
+      </div>
+      <div class="">
+        <div class="">{{ position.count }}</div>
+      </div>
+    </div>
+    <div class="wrapper">
+      <button (click)="deleteOrder(order)">Удалить</button>
+    </div>
+  </div>
+</div>
+<!-- <table>
+  <tr>
+    <td>...</td>
+  </tr>
+</table> -->

@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="button-wrapper">
+    <button [routerLink]="['/admin/dishes']">Блюда</button>
+    <button [routerLink]="['/admin/categories']">Категории</button>
+    <button [routerLink]="['/admin/users']">Покупатели</button>
+    <button [routerLink]="['/admin/orders']">Заказы</button>
+  </div>
+  <!-- <div *ngIf="show" class="form-wrapper">
+    <h2>Добавить блюдо</h2>
+    <form [formGroup]="editDish" class="form">
+      <div class="input-wrapper">
+        <label for="name" class="label">Название блюда</label>
+        <input type="text" id="name" formControlName="name" />
+      </div>
+      <div
+        class="error"
+        *ngIf="editDish.get('name')?.invalid && editDish.get('name')?.touched"
+      >
+        Введите название блюда
+      </div>
+      <br />
+      <div class="input-wrapper">
+        <label for="description" class="label">Описание блюда</label>
+        <input type="text" id="description" formControlName="description" />
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          editDish.get('description')?.invalid &&
+          editDish.get('description')?.touched
+        "
+      >
+        Введите описание блюда
+      </div>
+      <br />
+      <div class="input-wrapper">
+        <label for="price" class="label">Цена</label>
+        <input type="text" id="price" formControlName="price" />
+      </div>
+      <div
+        class="error"
+        *ngIf="editDish.get('price')?.invalid && editDish.get('price')?.touched"
+      >
+        Введите цену блюда
+      </div>
+      <br />
+      <div class="input-wrapper">
+        <label for="imageURL" class="label">Изображение</label>
+        <input type="text" id="imageURL" formControlName="imageURL" />
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          editDish.get('imageURL')?.invalid && editDish.get('imageURL')?.touched
+        "
+      >
+        Введите ссылку на изображение товара
+      </div>
+      <br />
+      <div class="input-wrapper">
+        <label for="ingredients" class="label">Ингредиенты</label>
+        <input type="text" id="ingredients" formControlName="ingredients" />
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          editDish.get('ingredients')?.invalid &&
+          editDish.get('ingredients')?.touched
+        "
+      >
+        Введите ингредиенты
+      </div>
+      <br />
+      <div>
+        <label for=" category" class="category">Категория блюда: </label>
+        <select id=" category" formControlName="category" class="select">
+          <option disabled value="null">выберите</option>
+          <option
+            *ngFor="let category of categoriesList"
+            [value]="category.value"
+          >
+            {{ category.label }}
+          </option>
+        </select>
+      </div>
+      <button type="submit" (click)="addNewDish()">Добавить</button>
+    </form>
+  </div> -->
+</div>

@@ -1,0 +1,74 @@
+<div class="form-wrapper">
+  <form [formGroup]="registerForm" (submit)="onSubmit()" class="form">
+    <div class="form-group">
+      <label for="type" class="label">Тип пользователя: </label>
+      <select id="type" formControlName="type" class="select">
+        <option disabled value="null">выберите</option>
+        <option *ngFor="let userType of userTypes" [value]="userType.value">
+          {{ userType.label }}
+        </option>
+      </select>
+    </div>
+    <label for="name" class="label">Имя</label>
+    <input type="text" id="name" formControlName="name" />
+    <div
+      class="error"
+      *ngIf="
+        registerForm.get('name')?.invalid && registerForm.get('name')?.touched
+      "
+    >
+      Пожалуйста введите имя.Имя должно состоять не менее чем из трех букв
+    </div>
+    <br /><br />
+
+    <label for="email" class="label">Email</label>
+    <input type="text" id="email" formControlName="email" />
+    <div
+      class="error"
+      *ngIf="
+        registerForm.get('email')?.invalid && registerForm.get('email')?.touched
+      "
+    >
+      Некоректно введены данные
+    </div>
+    <br /><br />
+
+    <label for="password" class="label">Пароль</label>
+    <input type="password" id="password" formControlName="password" />
+    <div
+      class="error"
+      *ngIf="password?.errors?.['required'] && password?.touched && password?.invalid"
+    >
+      Пароль обязателен
+    </div>
+    <div class="error" *ngIf="password?.errors?.['minlength']">
+      Минимальная длинна пароля 6 символов
+    </div>
+
+    <br /><br />
+    <label for="passwordConfirm" class="label">Повторите пароль</label>
+    <input
+      type="password"
+      id="passwordConfirm"
+      formControlName="passwordConfirm"
+    />
+
+    <div
+      class="error"
+      *ngIf="
+        password?.value === passwordConfirm?.value ? null : { mismatch: true }
+      "
+    >
+      Пароль не совпадает
+    </div>
+    <div class="error" *ngIf="emailMatched">
+      Пользователь с таким имейлом уже существует
+    </div>
+    <br />
+
+    <button type="submit" [disabled]="!registerForm.valid">sign up</button>
+    <div [routerLink]="['/login']" class="login-link">
+      Уже зарегистрирован? Перейди для входа в акаунт
+    </div>
+  </form>
+</div>

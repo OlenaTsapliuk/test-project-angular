@@ -1,0 +1,58 @@
+.one-card {
+  margin-top: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+  font-style: normal;
+  display: inline-block;
+  width: 100%;
+  height: 500px;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
+      1px 4px 6px rgba(0, 0, 0, 0.16);
+    transform: scale(1.1);
+    cursor: zoom-in;
+    border-radius: 10px;
+  }
+}
+
+.image {
+  height: 300px;
+  object-fit: cover;
+  max-width: 100%;
+  border-radius: 15px;
+}
+
+.name {
+  height: 70px;
+  margin-top: 16px;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.description {
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.price {
+  text-align: center;
+  font-weight: 700;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+}

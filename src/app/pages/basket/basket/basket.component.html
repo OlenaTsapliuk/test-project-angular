@@ -1,0 +1,83 @@
+<div>
+  <h3 class="notification">
+    Внимание минимальная сумма заказа составляет 175 UAH
+  </h3>
+  <h2 class="title">Ваш заказ:</h2>
+  <div class="content">
+    <ng-container *ngFor="let item of basketList.dishes">
+      <div class="basket-container">
+        <div class="wrapper">
+          <img class="image" [src]="item.imageURL" />
+        </div>
+        <div class="wrapper">
+          <div class="name">{{ item.name }}</div>
+        </div>
+        <div class="wrapper">
+          <app-counter
+            [(counter)]="item.count"
+            (counterChange)="editTotalPrice(item)"
+          ></app-counter>
+        </div>
+        <div class="wrapper">
+          <div class="price">{{ item.price }} UAH</div>
+        </div>
+        <div class="wrapper">
+          <button (click)="deleteFromBasket(item.id)">Удалить</button>
+        </div>
+      </div>
+    </ng-container>
+    <div class="totalPrice">
+      Общая сумма заказа: {{ basketList.totalPrice }} UAH
+    </div>
+    <button (click)="show = !show" class="addToBuy">Оформить заказ</button>
+
+    <div *ngIf="show" class="form-wrapper">
+      <form [formGroup]="shoppingCartForm" class="form">
+        <div class="input-wrapper">
+          <label for="name" class="label">Имя</label>
+          <input type="text" id="name" formControlName="name" />
+        </div>
+        <!-- <div
+          class="error"
+          *ngIf="
+            shoppingCartForm.get('name')?.invalid &&
+            shoppingCartForm.get('name')?.touched
+          "
+        >
+          Пожалуйста введите имя.Имя должно состоять не менее чем из трех букв
+        </div> -->
+        <br /><br />
+        <div class="input-wrapper">
+          <label for="email" class="label">E-mail</label>
+          <input type="text" id="email" formControlName="email" />
+        </div>
+        <!-- <div
+          class="error"
+          *ngIf="
+            shoppingCartForm.get('email')?.invalid &&
+            shoppingCartForm.get('email')?.touched
+          "
+        >
+          Некоректно введены данные
+        </div> -->
+        <br /><br />
+        <div class="input-wrapper">
+          <label for="tel" class="label">Телефон</label>
+          <input type="text" id="tel" formControlName="tel" />
+        </div>
+        <div class="input-wrapper">
+          <label for="address" class="label">Адрес</label>
+          <input type="text" id="address" formControlName="address" />
+        </div>
+        <button
+          type="submit"
+          [disabled]="!shoppingCartForm.valid"
+          class="button-ok"
+          (click)="addToDb()"
+        >
+          ok
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

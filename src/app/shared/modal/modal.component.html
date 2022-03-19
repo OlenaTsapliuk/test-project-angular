@@ -1,0 +1,22 @@
+<ng-container *ngIf="shown">
+  <div class="backdrop" (click)="hideModal()"></div>
+  <div class="modal-wrapper">
+    <div class="modal-body">
+      <button class="close-icon" (click)="hideModal()">
+        <img src="../../../assets/images/close.svg" />
+      </button>
+      <div class="price">{{ dish?.name }}</div>
+      <img class="image" [src]="dish?.imageURL" />
+      <div class="description">
+        {{ dish?.description }}
+      </div>
+      <span class="price">{{ dish?.price }} UAH</span>
+      <div class="wrapper-counter">
+      <app-counter [(counter)]="count"></app-counter>
+      </div>
+      <button class="add" (click)="addCart()">
+        <img src="/assets/images/add.svg" class="icon-add" />
+      </button>
+    </div>
+  </div>
+</ng-container>

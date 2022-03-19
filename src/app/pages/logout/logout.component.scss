@@ -1,0 +1,22 @@
+.logout-icon {
+  width: 40px;
+  height: 40px;
+}
+.login-icon {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+}
+.text {
+  font-size: 16px;
+  font-weight: 700;
+}
+.content {
+  position: absolute;
+  right: 100px;
+  top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}

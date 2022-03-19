@@ -1,0 +1,29 @@
+<nav class="header">
+  <div class="auth">
+    <a [routerLink]="['/categories']"
+      ><img src="/assets/images/logo.png" class="logo"
+    /></a>
+    <diV *ngIf="isLoginStatus$ | async">
+      <div [routerLink]="['/basket']" class="wrapper">
+        <a>
+          <img
+            src="../../assets/images/basket.svg"
+            alt=""
+            class="basket-icon"
+          />
+        </a>
+        <div class="counter">{{ (basket$ | async)?.calcCount }}</div>
+      </div>
+    </diV>
+    <div class="four"><h1>ITop-чик</h1></div>
+
+    <!-- <app-basket></app-basket> -->
+    <div class="auth-nav" *ngIf="!(isLoginStatus$ | async)">
+      <a class="link" [routerLink]="['/register']"> Register </a>
+      <a class="link" [routerLink]="['/login']"> Login </a>
+    </div>
+    <div>
+      <app-logout></app-logout>
+    </div>
+  </div>
+</nav>

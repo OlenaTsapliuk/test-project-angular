@@ -1,0 +1,34 @@
+<div class="form-wrapper">
+  <form [formGroup]="loginForm" (submit)="onSubmit()" class="form">
+    <div class="form-group">
+      <label for="email" class="label">Email</label>
+      <input type="text" id="email" formControlName="email" />
+      <div
+        class="error"
+        *ngIf="
+          loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+        "
+      >
+        Неверный email пожалуйста проверньте данные.
+      </div>
+      <br /><br />
+      <label for="password" class="label">Пароль</label>
+      <input type="password" id="password" formControlName="password" />
+      <div
+        class="error"
+        *ngIf="
+          loginForm.get('password')?.invalid &&
+          loginForm.get('password')?.touched
+        "
+      >
+        Неверный пароль пожалуйста проверньте данные.
+      </div>
+      <br /><br />
+      <button type="submit">sign in</button>
+    </div>
+    <div class="error" *ngIf="emailMatched">Неверный Е-mail или пароль</div>
+    <a [routerLink]="['/register']" class="register-link">
+      Еще нет акаунта? Перейди для регистрации!
+    </a>
+  </form>
+</div>

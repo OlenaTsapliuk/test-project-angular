@@ -1,0 +1,31 @@
+<ul class="image-container">
+  <h2 class="title">Суп</h2>
+  <li class="image-wrapper">
+    <div [routerLinkActive]="'active-link'" [routerLink]="['/categories/01']">
+      <img src="/assets/images/sup.jpg" class="image-content" />
+    </div>
+  </li>
+  <h2 class="title">Салат</h2>
+  <li class="image-wrapper">
+    <div
+      [routerLinkActive]="'active-link'"
+      [routerLink]="['/categories/02']"
+      class="hover"
+    >
+      <img src="/assets/images/salad.jpg" class="image-content" />
+    </div>
+  </li>
+  <h2 class="title">Гарячее блюдо</h2>
+  <li class="image-wrapper">
+    <div [routerLinkActive]="'active-link'" [routerLink]="['/categories/03']">
+      <img src="/assets/images/hot-dish.jpg" class="image-content" />
+    </div>
+  </li>
+  <h2 class="title">Десерт</h2>
+  <li class="image-wrapper">
+    <div [routerLinkActive]="'active-link'" [routerLink]="['/categories/04']">
+      <img src="/assets/images/desert.jpg" class="image-content" />
+    </div>
+  </li>
+</ul>
+<app-dishes></app-dishes>
