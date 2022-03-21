@@ -1,6 +1,6 @@
 import { identifierName } from '@angular/compiler';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl,FormGroup, FormBuilder, Validators, ValidationErrors, ValidatorFn, AbstractControl, FormArray } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {  FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { CategoriesType, categoriesListOption, Category } from 'src/app/models/category.interface';
@@ -40,8 +40,6 @@ export class AdminComponent implements OnInit {
     
     
   }
-
-
 
   
   }

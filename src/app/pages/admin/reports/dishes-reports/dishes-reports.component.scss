@@ -1,12 +1,11 @@
 .list-wrapper {
   margin-top: 120px;
-  margin-bottom: 40px;
+  margin-bottom: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.form {
-}
+
 .dishesList {
   display: flex;
   flex-direction: column;
@@ -33,4 +32,52 @@ label {
 }
 .box {
   display: flex;
+  margin-bottom: 5px;
+}
+button {
+  width: 100px;
+  height: 30px;
+  cursor: pointer;
+  background-color: #b1c4b6;
+}
+.button-click {
+  margin-right: 5px;
+  border-radius: 2px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  border: 1px solid #000;
+  padding: 10px;
+}
+.input-entered {
+  width: 150px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.input-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.label {
+  margin-left: 10px;
+}
+.name {
+}
+.form-wrapper {
+  margin-top: 20px;
+}
+.dishes-wrapper {
+  border: 1px solid #000;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.add-dish-button {
+  position: absolute;
+  left: 100px;
+  width: 100px;
+  height: 35px;
+  background-color: #b1c4b6;
+  border-radius: 5px;
 }

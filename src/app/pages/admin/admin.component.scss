@@ -9,36 +9,6 @@
 .button-wrapper {
   margin-top: 120px;
 }
-button {
-  width: 100px;
-  height: 30px;
-  cursor: pointer;
-}
-.form {
-  display: flex;
-  flex-direction: column;
-  width: 350px;
-  border: 1px solid #000;
-  padding: 10px;
-}
-input {
-  width: 150px;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-.input-wrapper {
-  display: flex;
-  justify-content: space-between;
-}
-.label {
-  margin-left: 10px;
-}
-.name {
-}
-.form-wrapper {
-  margin-top: 20px;
-}
-
 
 .categoryList {
   display: flex;

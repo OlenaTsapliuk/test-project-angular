@@ -16,6 +16,7 @@ export class AuthService {
   currentUser$ = new BehaviorSubject({})
   isLoggedIn$ = new BehaviorSubject(false);
   userTypes!: UserTypeOption<UserType>[];
+ 
   
     
   constructor(private http: HttpClient, private router: Router) { }
@@ -112,7 +113,10 @@ export class AuthService {
   }
 
   
+  isAdmin() {
+    localStorage.getItem('type') === 'admin';
 
+}
 
 
 }

@@ -24,4 +24,7 @@ export class DishesService {
        
     return this.http.put<Dish>(`${environment.API_URL}dishes/${dish.id}`, dish);
   } 
+  public deleteDish(id:string): Observable<boolean>{
+    return this.http.delete<boolean>(`${environment.API_URL}dishes/${id}`)
+  }
 }

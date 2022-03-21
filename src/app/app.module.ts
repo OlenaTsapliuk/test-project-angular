@@ -30,6 +30,7 @@ import { AdminModule } from './pages/admin/admin.module';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,11 +38,9 @@ import { AdminModule } from './pages/admin/admin.module';
     FooterComponent,
     RegisterComponent,
     LoginComponent,
-    LogoutComponent,
+    LogoutComponent
+
    
- 
-    
-    
 
   ],
   imports: [

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -11,8 +11,10 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LogoutComponent implements OnInit {
 
   isLoginStatus$: BehaviorSubject<boolean>;
+ 
   constructor(private authService: AuthService, private router: Router) { 
-     this.isLoginStatus$ = this.authService.isLoggedIn$;
+    this.isLoginStatus$ = this.authService.isLoggedIn$;
+
   }
 
   ngOnInit(): void {
@@ -20,5 +22,10 @@ export class LogoutComponent implements OnInit {
   logoutUser() {
     this.authService.isLoggedOut();
     
-}
+  }
+  adminLogin() {
+    this.authService.isAdmin();
+    
+  }
+
 }

@@ -1,8 +1,124 @@
 <div *ngIf="formDish" class="list-wrapper">
+  <div>
+    <button (click)="show = !show" class="add-dish-button">
+      Добавить блюдо
+    </button>
+  </div>
+  <div *ngIf="show" class="form-wrapper">
+    <h2>Добавить блюдо</h2>
+    <form [formGroup]="addDish" class="form">
+      <div class="input-wrapper">
+        <label for="name" class="label">Название блюда</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="input-entered"
+        />
+      </div>
+      <div
+        class="error"
+        *ngIf="addDish.get('name')?.invalid && addDish.get('name')?.touched"
+      >
+        Введите название блюда
+      </div>
+      <br />
+      <div class="input-wrapper">
+        <label for="description" class="label">Описание блюда</label>
+        <input
+          type="text"
+          id="description"
+          formControlName="description"
+          class="input-entered"
+        />
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          addDish.get('description')?.invalid &&
+          addDish.get('description')?.touched
+        "
+      >
+        Введите описание блюда
+      </div>
+      <br />
+      <div class="input-wrapper">
+        <label for="price" class="label">Цена</label>
+        <input
+          type="text"
+          id="price"
+          formControlName="price"
+          class="input-entered"
+        />
+      </div>
+      <div
+        class="error"
+        *ngIf="addDish.get('price')?.invalid && addDish.get('price')?.touched"
+      >
+        Введите цену блюда
+      </div>
+      <br />
+      <div class="input-wrapper">
+        <label for="imageURL" class="label">Изображение</label>
+        <input
+          type="text"
+          id="imageURL"
+          formControlName="imageURL"
+          class="input-entered"
+        />
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          addDish.get('imageURL')?.invalid && addDish.get('imageURL')?.touched
+        "
+      >
+        Введите ссылку на изображение товара
+      </div>
+      <br />
+      <div class="input-wrapper">
+        <label for="ingredients" class="label">Ингредиенты</label>
+        <input
+          type="text"
+          id="ingredients"
+          formControlName="ingredients"
+          class="input-entered"
+        />
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          addDish.get('ingredients')?.invalid &&
+          addDish.get('ingredients')?.touched
+        "
+      >
+        Введите ингредиенты
+      </div>
+      <br />
+      <div>
+        <label for=" category" class="category">Категория блюда: </label>
+        <select id=" category" formControlName="category" class="select">
+          <option disabled value="null">выберите</option>
+          <option
+            *ngFor="let category of categoriesList"
+            [value]="category.value"
+          >
+            {{ category.label }}
+          </option>
+        </select>
+      </div>
+      <button type="submit" [disabled]="!addDish.valid" (click)="addNewDish()">
+        Добавить
+      </button>
+    </form>
+  </div>
   <h2>Список блюд</h2>
   <form [formGroup]="formDish">
     <div formArrayName="dishesList">
-      <div *ngFor="let dishes of dishesList.controls; index as i" class="form">
+      <div
+        *ngFor="let dishes of dishesList.controls; index as i"
+        class="dishes-wrapper"
+      >
         <div [formGroupName]="i" class="dishesList">
           <div class="box">
             <label for="id">Id </label>
@@ -49,8 +165,15 @@
             />
           </div>
           <div class="button-list">
-            <button (click)="editDish(dishes)">Edit</button>
-            <button (click)="saveDish(dishes)">Save</button>
+            <button (click)="editDish(dishes)" class="button-click">
+              Edit
+            </button>
+            <button (click)="saveDish(dishes)" class="button-click">
+              Save
+            </button>
+            <button (click)="deleteDish(dishes)" class="button-click">
+              Delete
+            </button>
           </div>
         </div>
       </div>

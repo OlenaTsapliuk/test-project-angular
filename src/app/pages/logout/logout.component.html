@@ -1,6 +1,15 @@
 <div class="content">
   <div *ngIf="isLoginStatus$ | async" (click)="logoutUser()">
     <img src="../../assets/images/login.png" alt="" class="login-icon" />
+
     <div class="text">Выйти</div>
+  </div>
+  <div>
+    <img
+      src="../../assets/images/control.png"
+      alt=""
+      class="login-icon"
+      [routerLink]="['/admin']"
+    />
   </div>
 </div>

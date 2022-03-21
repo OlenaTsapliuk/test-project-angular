@@ -3,9 +3,29 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 100px;
+  height: 120px;
   border-top: 1px solid #2a363b;
-  background-color: #23582a;
+  background-color: #c6bcbd;
+
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
+}
+.adress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+p {
+  font-size: 16px;
+  margin: 0;
+  margin-left: 5px;
+}
+h2 {
+  font-size: 18px;
+  margin: 5px 15px 0px;
+}
+.date {
+  text-align: center;
+  color: #04354b;
+  margin-top: 30px;
 }

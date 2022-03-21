@@ -27,16 +27,12 @@ export class LoginComponent implements OnInit {
   initForm() {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: [null, [Validators.required]]
+      password: [null, [Validators.required, Validators.minLength(6)]]
     });
     
   }
 
-  // isControlInvalid(controlName: string): boolean {
-  //   const control = this.loginForm.controls[controlName];
-  //   const result = control.invalid && control.touched;
-  //   return result;
-  // }
+
 
   onSubmit() {
     const val: User = this.loginForm.value;

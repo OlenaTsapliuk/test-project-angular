@@ -13,6 +13,7 @@ import { DishesService } from 'src/app/services/dishes.service';
 export class DishesReportsComponent implements OnInit {
   formDish!: FormGroup;
   addDish!: FormGroup;
+  public show: boolean = false;
   categoriesList!: categoriesListOption<CategoriesType>[];
   
   get dishesList(): FormArray { return this.formDish.get('dishesList') as FormArray; } 
@@ -62,7 +63,10 @@ export class DishesReportsComponent implements OnInit {
     const newDish = { ...this.addDish.value };
     this.dishesService.addDish(newDish).subscribe((dish) => {
   
-    })
+    });
+    this.addDish.reset();
+    alert('Блюдо добавлено');
+
   }
 
   editDish(form: any) {
@@ -95,5 +99,14 @@ export class DishesReportsComponent implements OnInit {
 
     })
   }
+
+  deleteDish(dish:any) {
+     
+    // this.users = this.users.filter(data => data !== user);
+    // this.authService.deleteUser(user.id).subscribe((data) => {
+    // console.log(data);
+    // });
+    // this.userList$ = this.authService.getUsers();
+    }
 
 }

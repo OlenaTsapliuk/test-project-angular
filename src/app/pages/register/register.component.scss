@@ -4,6 +4,7 @@ input.ng-touched.ng-invalid {
 .form-wrapper {
   display: flex;
   justify-content: center;
+  margin-bottom: 150px;
 }
 .form {
   display: flex;
@@ -11,7 +12,7 @@ input.ng-touched.ng-invalid {
   justify-content: left;
   margin-top: 150px;
   width: 420px;
-  height: 400px;
+  height: auto;
   border: 1px solid #000;
   padding: 15px;
   border-radius: 3px;

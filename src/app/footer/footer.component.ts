@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
+import 'moment/locale/ru'
 
 @Component({
   selector: 'app-footer',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  currentTime: string = moment().format('D MMMM YYYY ');
+// currentTime: string = moment().format('D MMMM YYYY HH:mm:ss');
+  
+  constructor() {
+    moment.locale('ru');
+    console.log('Current Time:', this.currentTime);
+    
+  }
 
   ngOnInit(): void {
   }
