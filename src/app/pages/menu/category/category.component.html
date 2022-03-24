@@ -1,30 +1,11 @@
 <ul class="image-container">
-  <h2 class="title">Суп</h2>
-  <li class="image-wrapper">
-    <div [routerLinkActive]="'active-link'" [routerLink]="['/categories/01']">
-      <img src="/assets/images/sup.jpg" class="image-content" />
-    </div>
-  </li>
-  <h2 class="title">Салат</h2>
-  <li class="image-wrapper">
+  <li *ngFor="let category of selectCategories$ | async" class="image-wrapper">
+    <h2 class="title">{{ category.name }}</h2>
     <div
+      [routerLink]="'/categories/' + category.id"
       [routerLinkActive]="'active-link'"
-      [routerLink]="['/categories/02']"
-      class="hover"
     >
-      <img src="/assets/images/salad.jpg" class="image-content" />
-    </div>
-  </li>
-  <h2 class="title">Гарячее блюдо</h2>
-  <li class="image-wrapper">
-    <div [routerLinkActive]="'active-link'" [routerLink]="['/categories/03']">
-      <img src="/assets/images/hot-dish.jpg" class="image-content" />
-    </div>
-  </li>
-  <h2 class="title">Десерт</h2>
-  <li class="image-wrapper">
-    <div [routerLinkActive]="'active-link'" [routerLink]="['/categories/04']">
-      <img src="/assets/images/desert.jpg" class="image-content" />
+      <img class="image-content" [src]="category?.imageURL" />
     </div>
   </li>
 </ul>

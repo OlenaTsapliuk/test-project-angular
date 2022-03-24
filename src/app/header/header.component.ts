@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   public isLoginStatus$: BehaviorSubject<boolean>;
   // public isLoginAdmin$: BehaviorSubject<boolean>;
   constructor(private router: Router, private basketService: BasketService, private authService: AuthService ) {
-    this.basket$ = this.basketService.basketService$;
+    this.basket$ = this.basketService.basketSub$;
     this.isLoginStatus$ = this.authService.isLoggedIn$;
   
     

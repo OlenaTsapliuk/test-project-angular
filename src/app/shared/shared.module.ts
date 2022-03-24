@@ -6,9 +6,8 @@ import { ModalComponent } from './modal/modal.component';
 import { SingleDishComponent } from './single-dish/single-dish.component';
 
 
-
 @NgModule({
-    declarations: [
+  declarations: [
       SingleDishComponent,
       ModalComponent,
       CounterComponent

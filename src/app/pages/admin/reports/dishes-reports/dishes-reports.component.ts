@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subject, take } from 'rxjs';
 import { categoriesListOption, CategoriesType } from 'src/app/models/category.interface';
 import { Dish } from 'src/app/models/dishes.interface';
 import { DishesService } from 'src/app/services/dishes.service';
@@ -10,15 +10,16 @@ import { DishesService } from 'src/app/services/dishes.service';
   templateUrl: './dishes-reports.component.html',
   styleUrls: ['./dishes-reports.component.scss']
 })
+  
 export class DishesReportsComponent implements OnInit {
-  formDish!: FormGroup;
-  addDish!: FormGroup;
+  public formDish!: FormGroup;
+  public addDish!: FormGroup;
   public show: boolean = false;
-  categoriesList!: categoriesListOption<CategoriesType>[];
+  public categoriesList!: categoriesListOption<CategoriesType>[];
   
   get dishesList(): FormArray { return this.formDish.get('dishesList') as FormArray; } 
   
-  allDishes$ = new Subject<Dish[]>();
+  public allDishes$ = new Subject<Dish[]>();
 
   constructor(private fb: FormBuilder, private dishesService:DishesService) { }
 
@@ -27,15 +28,15 @@ export class DishesReportsComponent implements OnInit {
     this.categoriesList = [
    { label: 'Суп', value:CategoriesType.Sup},
    { label: 'Салат', value: CategoriesType.Salad },
-   { label: 'Гарячее блюдо или гарнир', value: CategoriesType.Hot},
-  { label: 'Десерт', value: CategoriesType.Dessert }
+   { label: 'Гарячее блюдо или гарнир', value: CategoriesType.Hot },
+   { label: 'Десерт', value: CategoriesType.Dessert }
     ];
     
     this.initDishForm();
     this.getAllDishes();
   }
 
-   initDishForm() {
+  public initDishForm() {
     this.addDish = this.fb.group({
       name: ['', [
         Validators.required,
@@ -53,60 +54,57 @@ export class DishesReportsComponent implements OnInit {
    }
   
   
-    isControlInvalid(controlName: string): boolean {
+  public isControlInvalid(controlName: string): boolean {
     const control = this.addDish.controls[controlName];
     const result = control.invalid && control.touched;
     return result;
     }
   
-  addNewDish() {
+  public addNewDish() {
     const newDish = { ...this.addDish.value };
     this.dishesService.addDish(newDish).subscribe((dish) => {
-  
     });
     this.addDish.reset();
     alert('Блюдо добавлено');
-
   }
 
-  editDish(form: any) {
+  public editDish(form: any) {
     form.enable();
   }
 
-  saveDish(dish: any) {
-    console.log((dish as FormGroup).value)
+  public saveDish(form: AbstractControl) {
+    const dish = form.value;
     this.dishesService.editDish(dish).subscribe(() => {
       this.getAllDishes();
     });
   }
 
+  public getAllDishes() {
+     this.dishesService.getDishes().subscribe((dishes) => {
+       this.allDishes$.next(dishes);
+       console.log(dishes);
+       this.formDish = new FormGroup({
+         dishesList: new FormArray(
+           dishes.map(dish => this.fb.group({
+             id: [{ value: dish.id, disabled: true }], name: [{ value: dish.name, disabled: true }],
+             description: [{ value: dish.description, disabled: true }], price: [{ value: dish.price, disabled: true }],
+             imageURL: [{ value: dish.imageURL, disabled: true }], ingredients: [{ value: dish.ingredients, disabled: true }],
+             category: [{ value: dish.category, disabled: true }]
 
-  getAllDishes() {
-    this.dishesService.getDishes().subscribe((dishes) => {
-      this.allDishes$.next(dishes);
-      console.log(dishes);
-      this.formDish = new FormGroup({
-        dishesList: new FormArray(
-          dishes.map(dish => this.fb.group({
-            id: [{ value: dish.id, disabled: true }], name: [{ value: dish.name, disabled: true }],
-            description: [{ value: dish.description, disabled: true }], price: [{ value: dish.price, disabled: true }],
-            imageURL: [{ value: dish.imageURL, disabled: true }], ingredients: [{ value: dish.ingredients, disabled: true }],
-            category: [{ value: dish.category, disabled: true }]
+           }))
+         )
+       })
 
-          }))
-        )
-      })
-
-    })
+     });
   }
 
-  deleteDish(dish:any) {
-     
-    // this.users = this.users.filter(data => data !== user);
-    // this.authService.deleteUser(user.id).subscribe((data) => {
-    // console.log(data);
-    // });
-    // this.userList$ = this.authService.getUsers();
+  public deleteDish(dish:any) {
+    const dishes = this.formDish.value.dishesList;
+    dishes.filter((item:any) => item!== dish);
+    console.log(dish.value)
+    this.dishesService.deleteDish(dish.value.id).pipe(take(1)).subscribe((data) => {
+    console.log(data);
+    });
     }
 
 }

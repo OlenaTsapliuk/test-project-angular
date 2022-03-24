@@ -15,7 +15,6 @@ import { BasketModule } from './pages/basket/basket.module';
 import { LoginComponent } from './pages/login/login.component';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';

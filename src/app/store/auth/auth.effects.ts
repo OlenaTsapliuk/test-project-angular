@@ -10,7 +10,10 @@ import * as AuthActions from './auth.action';
 
 export class AuthEffects {
 
-    loginRequest$ = createEffect(() =>
+
+  constructor( private actions$: Actions, private authService: AuthService,private router: Router){}
+
+  loginRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.loginRequest),
         exhaustMap((action) => {
@@ -28,7 +31,7 @@ export class AuthEffects {
     )
     );
     
- loginSuccess$ = createEffect(
+  loginSuccess$ = createEffect(
      () => {
          return this.actions$.pipe(
            ofType(AuthActions.loginSuccess),
@@ -36,6 +39,38 @@ export class AuthEffects {
              this.authService.setToLocalStorage(loginSuccessResponse)
              this.authService.setUserType(loginSuccessResponse.type)
              
+             this.router.navigate(['/']);
+           })
+         )
+    },
+    { dispatch: false }
+  );
+
+  registerRequest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.registerRequest),
+        exhaustMap((action) => {
+          return this.authService
+            .register(action.credentials)
+            .pipe(
+              map((registerSuccessResponse) => {
+                return AuthActions.registerSuccess({ registerSuccessResponse })
+              }
+              ),
+              catchError((error) => of(AuthActions.registerFail({ error })))
+                )
+            }
+      )
+    )
+    );
+    
+ registerSuccess$ = createEffect(
+     () => {
+         return this.actions$.pipe(
+           ofType(AuthActions.registerSuccess),
+           tap(({ registerSuccessResponse }) => {
+             this.authService.setToLocalStorage(registerSuccessResponse)
+             this.authService.setUserType(registerSuccessResponse.type)
              this.router.navigate(['/']);
            })
          )
@@ -58,8 +93,6 @@ export class AuthEffects {
 //       ),
 //     { dispatch: false }
 //   );
-
-
-    constructor( private actions$: Actions, private authService: AuthService,private router: Router){}
+ 
 }
 

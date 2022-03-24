@@ -3,10 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BasketComponent } from './basket/basket.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CounterComponent } from 'src/app/shared/counter/counter.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-
-
 
 
 @NgModule({

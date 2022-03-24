@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, first, map, Observable, of, switchMap, throwError } from 'rxjs';
+import { BehaviorSubject, first, map, Observable, switchMap, throwError } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { environment } from 'src/environments/environment';
 import { User, UserType, UserTypeOption } from '../models/user.interface';
@@ -13,19 +13,15 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   public user: User[] = [];
-  currentUser$ = new BehaviorSubject({})
-  isLoggedIn$ = new BehaviorSubject(false);
-  userTypes!: UserTypeOption<UserType>[];
+  public isLoggedIn$ = new BehaviorSubject(false);
+  public userTypes!: UserTypeOption<UserType>[];
  
-  
-    
+   
   constructor(private http: HttpClient, private router: Router) { }
 
-  login(email: string, password: string): Observable<User | undefined> {
-    if (!email&&!password) {
-      
+  public login(email: string, password: string): Observable<User | undefined> {
+    if (!email&&!password) { 
       return throwError(() =>new Error());
-  
     } else { 
        return this.http.get<User[]>(`${environment.API_URL}users?email=${email}&password=${password}`)
       .pipe(first(), map((users) => users.length ? users[0] : undefined))
@@ -33,8 +29,7 @@ export class AuthService {
    
   }
 
-
-  register({ email, name, password, type }: Partial<User>): Observable <User> {
+  public register({ email, name, password, type }: Partial<User>): Observable <User> {
     const newUser: Partial<User> = {
       id: uuid(),
       type,
@@ -55,14 +50,14 @@ export class AuthService {
     )
   }
 
-  checkUserEmail(email: string): Observable<boolean> {
+  public checkUserEmail(email: string): Observable<boolean> {
      return this.http.get<User[]>(`${environment.API_URL}users?email=${email}`).pipe(first(),
        map((user) =>
         !!(user && user[0])
        ));
   }
 
-  updateUser(user: User): Observable<User> {
+  public updateUser(user: User): Observable<User> {
     if (!user) {
       return throwError(() =>new Error());
     }
@@ -75,48 +70,45 @@ export class AuthService {
     return this.http.get<User[]>(environment.API_URL + 'users');
   }
   
-   public deleteUser(id:string): Observable<boolean>{
+  public deleteUser(id:string): Observable<boolean>{
     return this.http.delete<boolean>(`${environment.API_URL}users/${id}`)
   }
 
-  setToken( token:any) {
+  public setToken( token:any) {
     localStorage.setItem('token', token);
-    this.isLoggedIn$.next(true);
-    
+    this.isLoggedIn$.next(true); 
   }
-  setUserType(type: string) {
+
+  public setUserType(type: string) {
     localStorage.setItem('type',type)
   }
  
-  
-  setToLocalStorage(user:User) {
+  public setToLocalStorage(user:User) {
     if(user) localStorage.setItem('user', JSON.stringify(user));
     this.isLoggedIn$.next(true);
   }
   
-  getFromLocalStorage() {
+  public getFromLocalStorage() {
     return JSON.parse(localStorage.getItem('user')!);
   }
 
-  getToken() {
+  public getToken() {
     localStorage.getItem('token') 
   }
 
-  isLoggedIn() {
+  public isLoggedIn() {
     return this.getToken() !==null;
   }
 
-  isLoggedOut() {
+  public isLoggedOut() {
     localStorage.clear();
     this.isLoggedIn$.next(false);
     this.router.navigateByUrl('/login'); 
   }
 
-  
-  isAdmin() {
-    localStorage.getItem('type') === 'admin';
-
-}
+  public isAdmin() {
+   return localStorage.getItem('type') === 'admin';
+  }
 
 
 }

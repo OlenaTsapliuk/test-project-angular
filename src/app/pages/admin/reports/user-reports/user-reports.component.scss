@@ -1,7 +1,5 @@
 .form-user {
   display: flex;
-
-  border: 1px solid #000;
 }
 .box {
   width: 200px;
@@ -15,4 +13,31 @@
 }
 h2 {
   text-align: center;
+}
+.title-cell {
+  border: 1px solid #000;
+  background-color: #2d775e;
+  height: 40px;
+}
+.cell {
+  text-align: center;
+  border: 1px solid #000;
+}
+.table {
+  width: 100%;
+  border: 1px solid #000;
+  margin-bottom: 10px;
+}
+.button-cell {
+  width: 100px;
+}
+.cell-address {
+  width: 300px;
+  text-align: center;
+  border: 1px solid #000;
+}
+.cell-name {
+  width: 200px;
+  text-align: center;
+  border: 1px solid #000;
 }

@@ -1,26 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, of, Subject, tap } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { v4 as uuid } from 'uuid';
-import { Dish, FullDish } from '../models/dishes.interface';
+import { FullDish } from '../models/dishes.interface';
 import { Order } from '../models/orders.interface';
 import { User } from '../models/user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
+  
 export class OrderService {
-public user!: User;
+  public user!: User;
   public dish!: FullDish;
   public orders: Order[] = [];
-
-  // ordersSubject$ = new BehaviorSubject(this.orders);
 
   constructor(private http: HttpClient ) { }
 
   
-  addOrders(order: Order): Observable<Order> {
+  public addOrders(order: Order): Observable<Order> {
     
     return this.http.post<Order>(`${environment.API_URL}orders`, order).pipe(
       map((res) => {
@@ -29,15 +27,14 @@ public user!: User;
     )
   };
 
-private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
   return (error: any): Observable<T> => {
-
     console.error(error); // log to console instead
     return of(result as T);
   };
   }
   
-    public getOrders(): Observable<Order[]> { 
+  public getOrders(): Observable<Order[]> { 
     return this.http.get<Order[]>(environment.API_URL + 'orders').pipe(
       catchError(this.handleError<Order[]>('getOrders', []))
     );;
@@ -49,9 +46,6 @@ private handleError<T>(operation = 'operation', result?: T) {
   );
   }
 
-
-
- 
   
 }
 

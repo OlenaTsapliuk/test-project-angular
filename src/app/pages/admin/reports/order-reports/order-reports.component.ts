@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable, take } from 'rxjs';
 import { Order } from 'src/app/models/orders.interface';
 import { OrderService } from 'src/app/services/order.service';
 
@@ -9,29 +9,30 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./order-reports.component.scss']
 })
 export class OrderReportsComponent implements OnInit {
- public orders: Order[] = [];
-  subscription!: Subscription;
-  orderList2$  = new Observable<Order[]>();
+  public orders: Order[] = [];
+  public orderList2$ = new Observable<Order[]>();
 
   constructor(private orderService: OrderService) {
-     this.orderList2$ = this.orderService.getOrders();
-   }
-
-  ngOnInit(): void {
+    this.orderList2$ = this.orderService.getOrders();
     
   }
 
-    ngOnDestroy(): void {
-    }
-  
-  
-    deleteOrder(order:Order) {
+  ngOnInit(): void {
+
+  }
+
+  ngOnDestroy(): void {
+  }
+
+  deleteOrder(order: Order) {
     this.orders = this.orders.filter(o => o !== order);
-      const deleteOrder = this.orderService.deleteOrder(order.id).subscribe((data) => {
-        console.log(data);
-      });
-this.orderList2$ = this.orderService.getOrders();
-    }
-  
+    const deleteOrder = this.orderService.deleteOrder(order.id).pipe(take(1)).subscribe((data) => {
+      console.log(data);
+    });
+    this.orderList2$ = this.orderService.getOrders();
+    console.log('ghghj',this.orders);
+    
+  }
+
 
 }

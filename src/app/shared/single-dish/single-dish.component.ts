@@ -12,23 +12,12 @@ import { BasketService } from 'src/app/services/basket.service';
 })
 export class SingleDishComponent implements OnInit {
 
- 
+  @Input() dish!: Dish;
 
-  @Input() dish: Dish = {
-    id: '',
-    name: "",
-    description: "",
-    price: 0,
-    imageURL: '',
-    ingredients: [],
-    category: [],
-  };
-
-  constructor(private basketService: BasketService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
-
 
 
 }

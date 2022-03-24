@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl,FormGroup, FormBuilder, Validators, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
-import { Router } from '@angular/router';
-import { catchError, map, of, Subject, switchMap, takeUntil, throwError } from 'rxjs';
-import { User, UserType, UserTypeOption } from 'src/app/models/user.interface';
-import { AuthService } from 'src/app/services/auth.service';
+import { FormGroup, FormBuilder, Validators, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
+import { UserType, UserTypeOption } from 'src/app/models/user.interface';
+import { Store } from '@ngrx/store';
+import *as AuthActions from '../../store/auth/auth.action'
 
 @Component({
   selector: 'app-register',
@@ -12,19 +11,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  registerForm!: FormGroup;
-  userTypes!: UserTypeOption<UserType>[];
-  user: User[] = [];
-
-  notifier = new Subject();
-
-  public emailRepeat: boolean = false;
+  public registerForm!: FormGroup;
+  public userTypes!: UserTypeOption<UserType>[];
   public emailMatched: boolean = false;
   
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
+    private store: Store
   ) { }
 
   ngOnInit(): void {
@@ -37,23 +30,19 @@ export class RegisterComponent implements OnInit {
 
   initForm() {
     this.registerForm = this.fb.group({
-      type: [null, [Validators.required]],
+      type: ['', [Validators.required]],
       name: ['', [
         Validators.required,
         Validators.minLength(3)]
       ],
       email: ['', [
         Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6), this.passwordValidator]],
-      passwordConfirm: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      passwordConfirm: ['', [Validators.required, this.passwordMatched]],
    
     });
 
   }
-  //   passwordMatchValidator(password:string, passwordConfirm:string) {
-  //    return this.registerForm.get('password')?.value === this.registerForm.get('passwordConfirm')?.value
-  //       ? null : {'mismatch': true};
-  // }
   
   public get password() {
     return this.registerForm.get('password')
@@ -62,11 +51,11 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('passwordConfirm')
   }
 
-  isControlInvalid(controlName: string): boolean {
-    const control = this.registerForm.controls[controlName];
-    const result = control.invalid && control.touched;
-    return result;
-  }
+  // isControlInvalid(controlName: string): boolean {
+  //   const control = this.registerForm.controls[controlName];
+  //   return control.invalid && control.touched;
+    
+  // }
 
   //   passwordValidator(control: FormControl): ValidationErrors {
   //     const value = control.value;
@@ -83,7 +72,7 @@ export class RegisterComponent implements OnInit {
   //   return this.registerForm.value.setErrors(null);
   // }
   
-  passwordValidator = (): ValidatorFn => {
+  passwordMatched = (): ValidatorFn => {
     return (control: AbstractControl): ValidationErrors | null => {
       const password: AbstractControl | undefined | null = control?.parent?.get('password');
       const isSame = password?.value === control?.value;
@@ -93,19 +82,25 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     const { email, password, name, type } = this.registerForm.value;
-    const user: Partial<User> = { email, password, name, type };
-    if (email && password && name) {
-      this.authService.register(user).subscribe((user) => {
-        if (user)
-          // this.authService.setToken(user.token);
-          this.authService.setToLocalStorage(user);
-        console.log(user)
-         this.router.navigateByUrl(''); 
-      }, err => {
-        this.emailMatched = true;
-      })
-    }
-  
+    const credentials = { email, password, name, type };
 
+    if (this.registerForm.valid) {
+      this.store.dispatch(AuthActions.registerRequest({ credentials }));
+    }
+    this.emailMatched = true;
+
+    // const user: Partial<User> = { email, password, name, type };
+    // if (email && password && name) {
+    //   this.authService.register(user).pipe(take(1)).subscribe((user) => {
+    //     if (user)
+    //       this.authService.setToLocalStorage(user);
+    //      this.router.navigateByUrl(''); 
+    //   }, err => {
+    //     this.emailMatched = true;
+    //   })
+    // };
   }
+
+
+
 }

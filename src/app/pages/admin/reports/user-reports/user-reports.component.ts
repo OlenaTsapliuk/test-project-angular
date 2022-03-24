@@ -10,7 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class UserReportsComponent implements OnInit {
   public users: User[] = [];
-   userList$  = new Observable<User[]>();
+  public userList$  = new Observable<User[]>();
+  
   constructor(private authService: AuthService) { 
     this.userList$ = this.authService.getUsers();
   }
@@ -19,9 +20,7 @@ export class UserReportsComponent implements OnInit {
     
   }
 
-
-
-  deleteUserFromDb(user:User) {
+  public deleteUserFromDb(user:User) {
     this.users = this.users.filter(data => data !== user);
     this.authService.deleteUser(user.id).subscribe((data) => {
     console.log(data);

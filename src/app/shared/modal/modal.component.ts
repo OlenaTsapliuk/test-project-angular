@@ -1,8 +1,6 @@
-import { AfterViewInit, Component, HostListener, Input, OnDestroy, OnInit,ViewChild } from '@angular/core';
-import { take } from 'rxjs';
+import { Component, HostListener, Input } from '@angular/core';
 import { Dish, FullDish} from 'src/app/models/dishes.interface';
 import { BasketService } from 'src/app/services/basket.service';
-import { CounterComponent } from '../counter/counter.component';
 
 @Component({
   selector: 'app-modal',
@@ -12,6 +10,7 @@ import { CounterComponent } from '../counter/counter.component';
 export class ModalComponent {
   @Input() dish!: Dish;
   public count: number = 1;
+  
   @HostListener('window:keydown', ['$event'])
    onKeyDownHandler(event: KeyboardEvent) {
 
@@ -40,10 +39,8 @@ export class ModalComponent {
     this.basketService.addToBasket(dish);
     this.count = 1;
     this.hideModal();
-   
   }
-  
-  
+   
  }
 
  

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BasketService } from 'src/app/services/basket.service';
+
 
 @Component({
   selector: 'app-counter',
@@ -10,15 +10,10 @@ export class CounterComponent implements OnInit {
   @Input() counter = 1;
   @Output() counterChange = new EventEmitter<number>();
 
-  constructor(private basketService: BasketService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
-
-  // resetCounter() {
-  //   this.counter = 1;
-  //   console.log(this.counter);
-  // }
 
   increment() {
     this.counter++;

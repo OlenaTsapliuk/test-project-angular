@@ -38,9 +38,29 @@ export const authReducerInternal = createReducer(
       token: '',
     
     };
+  }),
+   on(authActions.registerSuccess, (state, { registerSuccessResponse }) => {
+   
+    return {
+      ...state,
+      user:registerSuccessResponse.user,
+      token: registerSuccessResponse.token,
+    
+    };
+    }),
+  on(authActions.registerFail, (state, { error }) => {
+
+    return {
+      ...state,
+      registerError:error,
+      user:null,
+      token: '',
+    
+    };
    }),
  
 );
+
 export function authReducer(state: AuthState | undefined, action: Action) {
   return authReducerInternal(state, action);
 }

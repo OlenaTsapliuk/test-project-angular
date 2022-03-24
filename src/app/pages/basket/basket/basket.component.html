@@ -15,7 +15,7 @@
         <div class="wrapper">
           <app-counter
             [(counter)]="item.count"
-            (counterChange)="editTotalPrice(item)"
+            (counterChange)="editTotalPrice()"
           ></app-counter>
         </div>
         <div class="wrapper">
@@ -37,7 +37,7 @@
           <label for="name" class="label">Имя</label>
           <input type="text" id="name" formControlName="name" />
         </div>
-        <!-- <div
+        <div
           class="error"
           *ngIf="
             shoppingCartForm.get('name')?.invalid &&
@@ -45,13 +45,13 @@
           "
         >
           Пожалуйста введите имя.Имя должно состоять не менее чем из трех букв
-        </div> -->
+        </div>
         <br /><br />
         <div class="input-wrapper">
           <label for="email" class="label">E-mail</label>
           <input type="text" id="email" formControlName="email" />
         </div>
-        <!-- <div
+        <div
           class="error"
           *ngIf="
             shoppingCartForm.get('email')?.invalid &&
@@ -59,7 +59,7 @@
           "
         >
           Некоректно введены данные
-        </div> -->
+        </div>
         <br /><br />
         <div class="input-wrapper">
           <label for="tel" class="label">Телефон</label>

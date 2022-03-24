@@ -13,8 +13,9 @@ export class AdminGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-      if (localStorage.getItem('type') !== 'admin') {
+    const isAdmin = this.authService.isAdmin();
+     
+    if (!isAdmin) {
           this.router.navigate(['/']); // go to login if not authenticated
           return false;
           

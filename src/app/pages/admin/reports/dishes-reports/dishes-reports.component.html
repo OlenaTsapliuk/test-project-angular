@@ -116,7 +116,7 @@
   <form [formGroup]="formDish">
     <div formArrayName="dishesList">
       <div
-        *ngFor="let dishes of dishesList.controls; index as i"
+        *ngFor="let dish of dishesList.controls; index as i"
         class="dishes-wrapper"
       >
         <div [formGroupName]="i" class="dishesList">
@@ -165,13 +165,9 @@
             />
           </div>
           <div class="button-list">
-            <button (click)="editDish(dishes)" class="button-click">
-              Edit
-            </button>
-            <button (click)="saveDish(dishes)" class="button-click">
-              Save
-            </button>
-            <button (click)="deleteDish(dishes)" class="button-click">
+            <button (click)="editDish(dish)" class="button-click">Edit</button>
+            <button (click)="saveDish(dish)" class="button-click">Save</button>
+            <button (click)="deleteDish(dish)" class="button-click">
               Delete
             </button>
           </div>
