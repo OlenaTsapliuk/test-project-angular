@@ -30,7 +30,6 @@ export class OrderReportsComponent implements OnInit {
       console.log(data);
     });
     this.orderList2$ = this.orderService.getOrders();
-    console.log('ghghj',this.orders);
     
   }
 

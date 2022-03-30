@@ -101,7 +101,6 @@ export class DishesReportsComponent implements OnInit {
   public deleteDish(dish:any) {
     const dishes = this.formDish.value.dishesList;
     dishes.filter((item:any) => item!== dish);
-    console.log(dish.value)
     this.dishesService.deleteDish(dish.value.id).pipe(take(1)).subscribe((data) => {
     console.log(data);
     });
