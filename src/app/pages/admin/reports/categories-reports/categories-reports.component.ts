@@ -46,8 +46,7 @@ import { CategoriesService } from 'src/app/services/categories.service';
   
   public addNewCategory() {
     const newCategory = { ...this.addCategory.value };
-    this.categoriesService.addCategory(newCategory).subscribe((category) => {
-      console.log('newCategory', category) 
+    this.categoriesService.addCategory(newCategory).subscribe(() => { 
     })
     this.name.reset();
   }

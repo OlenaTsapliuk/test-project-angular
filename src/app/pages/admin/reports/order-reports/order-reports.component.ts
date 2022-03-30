@@ -26,8 +26,7 @@ export class OrderReportsComponent implements OnInit {
 
   deleteOrder(order: Order) {
     this.orders = this.orders.filter(o => o !== order);
-    const deleteOrder = this.orderService.deleteOrder(order.id).pipe(take(1)).subscribe((data) => {
-      console.log(data);
+    const deleteOrder = this.orderService.deleteOrder(order.id).pipe(take(1)).subscribe(() => {
     });
     this.orderList2$ = this.orderService.getOrders();
     

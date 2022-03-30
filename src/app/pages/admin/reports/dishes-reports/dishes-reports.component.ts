@@ -82,7 +82,6 @@ export class DishesReportsComponent implements OnInit {
   public getAllDishes() {
      this.dishesService.getDishes().subscribe((dishes) => {
        this.allDishes$.next(dishes);
-       console.log(dishes);
        this.formDish = new FormGroup({
          dishesList: new FormArray(
            dishes.map(dish => this.fb.group({
@@ -101,8 +100,8 @@ export class DishesReportsComponent implements OnInit {
   public deleteDish(dish:any) {
     const dishes = this.formDish.value.dishesList;
     dishes.filter((item:any) => item!== dish);
-    this.dishesService.deleteDish(dish.value.id).pipe(take(1)).subscribe((data) => {
-    console.log(data);
+    this.dishesService.deleteDish(dish.value.id).pipe(take(1)).subscribe(() => {
+   
     });
     }
 
