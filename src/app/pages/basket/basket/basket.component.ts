@@ -79,7 +79,6 @@ export class BasketComponent implements OnInit, OnDestroy {
 
     this.orderService.addOrders(order).pipe(take(1)).subscribe((data) => {
       this.router.navigate(['/']);
-      console.log(data)
     });
   }
   
@@ -87,7 +86,6 @@ export class BasketComponent implements OnInit, OnDestroy {
     this.user = {...this.user, ...this.shoppingCartForm.value }
     if (this.user) {
       this.authService.updateUser(this.user).pipe(take(1)).subscribe((user) => {
-        console.log('update', user)
         this.authService.setToLocalStorage(user);
       });
     }

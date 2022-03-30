@@ -14,8 +14,6 @@ export class FooterComponent implements OnInit {
   
   constructor() {
     moment.locale('ru');
-    console.log('Current Time:', this.currentTime);
-    
   }
 
   ngOnInit(): void {

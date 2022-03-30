@@ -11,7 +11,7 @@ export enum CategoriesType {
     Dessert='04'
 
 }
-export interface categoriesListOption<T> {
+export interface CategoriesListOption<T> {
     label: string,
     value: T
 }
