@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription, take } from 'rxjs';
+import { mergeMap, Subscription, take } from 'rxjs';
 import { Basket } from 'src/app/models/basket.interface';
 import { FullDish } from 'src/app/models/dishes.interface';
 import { Order } from 'src/app/models/orders.interface';
@@ -29,7 +29,7 @@ export class BasketComponent implements OnInit, OnDestroy {
   
   ngOnInit(): void {
 
-    this.subscription = this.basketService.basketSub$.subscribe(data => {
+    this.subscription = this.basketService.basketSub$.pipe(take(1)).subscribe(data => {
       this.basketList = data;
     })
     
@@ -64,8 +64,17 @@ export class BasketComponent implements OnInit, OnDestroy {
     this.basketService.calcTotalPrice();
   }
 
+  toggleButton() {
+  this.show = !this.show
+  }
+
   addOrdersToDb() {
-    const order: Order = {
+  
+    this.user = {...this.user, ...this.shoppingCartForm.value }
+    this.authService.updateUser(this.user).pipe(
+      take(1),
+      mergeMap(() => {
+      const order: Order = {
       id: uuid(),
       userName:this.user.name,
       userEmail: this.user.email,
@@ -73,34 +82,17 @@ export class BasketComponent implements OnInit, OnDestroy {
       userTel:this.user.tel,
       positions: this.basketList.dishes,
       calcTotalPrice:this.basketList.totalPrice
-  
     };
-     console.log('sssssdsds', order.calcTotalPrice)
-
-    this.orderService.addOrders(order).pipe(take(1)).subscribe((data) => {
+    return this.orderService.addOrders(order)
+      }
+      )).subscribe(() => {
+     
       this.router.navigate(['/']);
+        this.authService.setToLocalStorage(this.user);
+        this.basketService.resetBasket();
     });
-  }
-  
-  updateUser() {
-    this.user = {...this.user, ...this.shoppingCartForm.value }
-    if (this.user) {
-      this.authService.updateUser(this.user).pipe(take(1)).subscribe((user) => {
-        this.authService.setToLocalStorage(user);
-      });
-    }
-      
-  }
 
-  addToDb() {
-    this.addOrdersToDb();
-    this.updateUser();
-    this.resetBasket();
-    
   }
   
-  resetBasket() {
-    this.basketService.resetBasket();
-  }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { categoriesListOption, CategoriesType, Category } from 'src/app/models/category.interface';
+import { CategoriesListOption, CategoriesType, Category } from 'src/app/models/category.interface';
 import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { CategoriesService } from 'src/app/services/categories.service';
   styleUrls: ['./categories-reports.component.scss']
 })
   export class CategoriesReportsComponent implements OnInit, OnDestroy {
-  public categoriesList!: categoriesListOption<CategoriesType>[];
+  public categoriesList!: CategoriesListOption<CategoriesType>[];
   public categories: Category[] = [];
   public allCategories$ = new BehaviorSubject<Category[]>(this.categories);
   public categoriesSubscribe!: Subscription;

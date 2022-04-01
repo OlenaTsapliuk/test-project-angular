@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, take } from 'rxjs';
 import { User } from 'src/app/models/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -22,8 +22,7 @@ export class UserReportsComponent implements OnInit {
 
   public deleteUserFromDb(user:User) {
     this.users = this.users.filter(data => data !== user);
-    this.authService.deleteUser(user.id).subscribe((data) => {
-    console.log(data);
+    this.authService.deleteUser(user.id).pipe(take(1)).subscribe(() => {
     });
     this.userList$ = this.authService.getUsers();
     }

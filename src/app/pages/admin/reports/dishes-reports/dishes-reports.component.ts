@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, take } from 'rxjs';
-import { categoriesListOption, CategoriesType } from 'src/app/models/category.interface';
+import { CategoriesListOption, CategoriesType } from 'src/app/models/category.interface';
 import { Dish } from 'src/app/models/dishes.interface';
 import { DishesService } from 'src/app/services/dishes.service';
 
@@ -15,7 +15,7 @@ export class DishesReportsComponent implements OnInit {
   public formDish!: FormGroup;
   public addDish!: FormGroup;
   public show: boolean = false;
-  public categoriesList!: categoriesListOption<CategoriesType>[];
+  public categoriesList!: CategoriesListOption<CategoriesType>[];
   
   get dishesList(): FormArray { return this.formDish.get('dishesList') as FormArray; } 
   

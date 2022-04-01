@@ -29,7 +29,7 @@
     <div class="totalPrice">
       Общая сумма заказа: {{ basketList.totalPrice }} UAH
     </div>
-    <button (click)="show = !show" class="addToBuy">Оформить заказ</button>
+    <button (click)="toggleButton()" class="addToBuy">Оформить заказ</button>
 
     <div *ngIf="show" class="form-wrapper">
       <form [formGroup]="shoppingCartForm" class="form">
@@ -73,7 +73,7 @@
           type="submit"
           [disabled]="!shoppingCartForm.valid"
           class="button-ok"
-          (click)="addToDb()"
+          (click)="addOrdersToDb()"
         >
           ok
         </button>
